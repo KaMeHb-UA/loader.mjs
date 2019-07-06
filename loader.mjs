@@ -71,7 +71,7 @@ export function resolve(specifier, parentModuleURL = baseURL, defaultResolve){
 export async function dynamicInstantiate(url){
     const fname = await httpsDownloadModule(url);
     const exp = await import(fname);
-    fs.unlink(fname);
+    fs.unlink(fname, () => {});
     const exports = Object.getOwnPropertyNames(exp);
     return {
         exports,
